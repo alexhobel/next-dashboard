@@ -1,0 +1,10 @@
+- app/ui: hier sind die Komponenten definiert. Diese werden exportiert und können dann als tag in einer anderen komponente verwendet werden
+- Wenn eine <link> Komponente definiert wurde, prerendert next.js schon die Seiten die hier definiert sind (partial rendering)
+- Beim Routing wird auf das App Verzeichnis zugegriffen und als root betrachtet. Also / greift auf /app einfach zu.
+- Props: Steht für propertiy in react und sie sind dafür verantwortlich, Daten von einer Komponente an eine andere weiter zu geben
+- layout.tsx und page.tsx: jede Route die eine eigene UI haben soll, hat diese Files. Wenn die Route aufgerufen wird, wird die layout.tsx Datei geladen. Ale weiteren unterordner werden vorgerendert und in der layout datei kann über children prop definiert werden, wo dann die unterroute hingerendert wird. Als root layout wird die layout.tsx im /app Verzeichnis bezeichnet und ist vorraussetzung. In der Children Property kann auch eine weitere layout datei z.B. von einer anderen Route geladen werden
+
+- React ist eine Bibliothek für UI Komponenten und next.js ein Framework 
+- JSX ermöglicht es, JS funktionen, die html returnen als Tag in neuen jsx funktionen einzubinden
+- JSX muss immer genested sein, also wenn mehrere Zeilen HTML im return stehen, muss ein Fagment <> </> drum rum sein. Translator: https://transform.tools/html-to-jsx
+
