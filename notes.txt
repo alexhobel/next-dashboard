@@ -7,4 +7,11 @@
 - React ist eine Bibliothek für UI Komponenten und next.js ein Framework 
 - JSX ermöglicht es, JS funktionen, die html returnen als Tag in neuen jsx funktionen einzubinden
 - JSX muss immer genested sein, also wenn mehrere Zeilen HTML im return stehen, muss ein Fagment <> </> drum rum sein. Translator: https://transform.tools/html-to-jsx
+- komponenten können async definiert werden, das ist vor allem wichtig wenn daten aus einer db anwendung gefetcht werden (mit await)
 
+DB:
+- Cloud Basierte postgres db in vercel (hosting plattform die mit github repo auf code basis verknüpft ist)
+- React Server Components: ermöglichen SSR, da sie zwar über das tag in das js xml eingefügt werden, aber schon gerendert. Next.js nutzt diese per Default
+- useState: wenn lokal in der Komponente was geändert wird (counter o.Ä.) dann verwaltet react den Status und sorgt dafür dass bei neuem rendering der state gleich bleibt
+- Server Components werden genutzt um die DB zu fetchen, da sie ja eh auf dem Server ausgeführt werden und man braucht keine API 
+- Mit ServerComponents lässt sich Client und Server trennen
