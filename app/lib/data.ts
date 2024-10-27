@@ -14,12 +14,13 @@ export async function fetchRevenue() {
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
 
-    // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const data = await sql<Revenue>`SELECT * FROM revenue`;
+    const data = await sql<Revenue>`SELECT * FROM revenue`; //DB Abfrage: Durch postres SDK von Vercel (library) kann die FUnltion sql aufgerfen werden und dahinter ein SQL Befehl geschrieben werden. Mit einem Generic kann angegeben werden, welcher Typ als Rückgabewert der Funktion erwartet wird. 
 
-    // console.log('Data fetch completed after 3 seconds.');
+
+    console.log('Data fetch completed after 3 seconds.');
 
     return data.rows;
   } catch (error) {
@@ -29,14 +30,15 @@ export async function fetchRevenue() {
 }
 
 export async function fetchLatestInvoices() {
+  //<LatestInvoiceRaw> wird angegeben, da der Typ definiert und importiert wurde un typescript sicherstellen kann, dass die Daten diesem Typ entsprechen
+  //Zuerst werden die rohdaten gefetcht und dann durch map funktion formatiert
   try {
-    const data = await sql<LatestInvoiceRaw>`
+    const data = await sql<LatestInvoiceRaw>` 
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
       FROM invoices
       JOIN customers ON invoices.customer_id = customers.id
       ORDER BY invoices.date DESC
       LIMIT 5`;
-
     const latestInvoices = data.rows.map((invoice) => ({
       ...invoice,
       amount: formatCurrency(invoice.amount),
@@ -60,7 +62,7 @@ export async function fetchCardData() {
          SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
          FROM invoices`;
 
-    const data = await Promise.all([
+    const data = await Promise.all([//.all -> um parallel auszuführen
       invoiceCountPromise,
       customerCountPromise,
       invoiceStatusPromise,

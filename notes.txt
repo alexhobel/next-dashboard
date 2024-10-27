@@ -15,3 +15,11 @@ DB:
 - useState: wenn lokal in der Komponente was geändert wird (counter o.Ä.) dann verwaltet react den Status und sorgt dafür dass bei neuem rendering der state gleich bleibt
 - Server Components werden genutzt um die DB zu fetchen, da sie ja eh auf dem Server ausgeführt werden und man braucht keine API 
 - Mit ServerComponents lässt sich Client und Server trennen
+
+Architektur:
+- in /lib ist die data Datei, die alle DB Anfragen vornimmt und diese kann man dann in die Komponente importieren
+- in /lib/definitions sind die Typen der Daten definiert, diese werden in /lib/data importiert und dann mittels typescript parameter definiert, wie der Datentyp aus der DB aussehen muss
+- loading.tsx: Spezielles next.js File, welches beim Ladeprozess einer Komponente ausgespielt wird
+
+- <Suspense> kann Komponenten wrappen und lädt diese dann erst in die Seite, wenn die Daten für die Komponente vorhanden sind. D.h. die fetch Funktionen für Daten kommen in die Komponente anstatt mit Props die Daten von der untergeordneten Komponente zu übergeben. So kann man granular enstscheinden wie die UI sich aufbaut
+- <Pagination/> 
